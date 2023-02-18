@@ -1,4 +1,4 @@
-#include "arg_parser.h"
+#include "arg_parser.hpp"
 #include "iomanip"
 #include "iostream"
 #include "stdexcept"
@@ -20,8 +20,6 @@ void ArgParser::help() {
   }
 }
 
-void ArgParser::start_machine(std::string filename) {}
-
 void ArgParser::parse_args(int argc, char *argv[]) {
   std::vector<std::string> argList(argv, argv + argc);
   if (argc < 2) {
@@ -38,3 +36,5 @@ void ArgParser::parse_args(int argc, char *argv[]) {
     start_machine(argList[2]);
   }
 }
+
+void ArgParser::start_machine(std::string filename) {}

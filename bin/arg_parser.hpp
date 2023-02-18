@@ -4,9 +4,8 @@
 #include <vector>
 
 class ArgParser {
-  static void start_machine(std::string filename);
   static void help();
-  static void validate_arguments();
+  static void start_machine(std::string filename);
 
 public:
   static void parse_args(int argc, char *argv[]);
