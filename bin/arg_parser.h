@@ -4,7 +4,7 @@
 #include <vector>
 
 class ArgParser {
-  static void start_machine(char filename[]);
+  static void start_machine(std::string filename);
   static void help();
   static void validate_arguments();
 

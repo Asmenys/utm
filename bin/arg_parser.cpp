@@ -2,6 +2,8 @@
 #include "iomanip"
 #include "iostream"
 #include "stdexcept"
+#include <exception>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -18,21 +20,21 @@ void ArgParser::help() {
   }
 }
 
-void ArgParser::start_machine(char filename[]) {}
+void ArgParser::start_machine(std::string filename) {}
 
 void ArgParser::parse_args(int argc, char *argv[]) {
+  std::vector<std::string> argList(argv, argv + argc);
   if (argc < 2) {
-    throw std::runtime_error("UTM: error: no input files \n");
+    throw std::runtime_error(
+        "UTM: error: Missing arguments, use -h for more information \n");
   }
-  if (argc > 3) {
-    throw std::runtime_error("UTM: error: too many arguments \n");
+  if (argList[1] == "-h") {
+    help();
   }
-  for (int i = 1; i < argc; i++) {
-    if (argv[i][1] == 'h') {
-      help();
+  if (argList[1] == "-f") {
+    if (argc < 3) {
+      throw std::runtime_error("UTM: error: filename expected \n");
     }
-    if (argv[i][1] == 'f') {
-      start_machine(argv[i+1]);
-    }
+    start_machine(argList[2]);
   }
 }
