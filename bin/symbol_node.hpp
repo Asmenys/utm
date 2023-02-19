@@ -1,7 +1,10 @@
+#pragma once
+#include <set>
 #include <string>
-#include <unordered_set>
 class SymbolNode {
 public:
+  SymbolNode(std::string value);
   std::string value;
-  std::unordered_set<SymbolNode> adjacent_nodes;
+  std::set<SymbolNode> adjacent_nodes;
+  bool operator<(const SymbolNode &node) const;
 };
