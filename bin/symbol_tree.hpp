@@ -1,7 +1,6 @@
-#include <string>
-#include <vector>
-class SymbolTree {
+#include "symbol_node.hpp"
+class SymbolTree
+{
     public:
-    std::string root;
-    std::vector<std::string> nodes;
+    SymbolNode root;
 };
