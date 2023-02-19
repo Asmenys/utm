@@ -21,19 +21,19 @@ void ArgParser::help() {
 }
 
 void ArgParser::parse_args(int argc, char *argv[]) {
-  std::vector<std::string> argList(argv, argv + argc);
+  std::vector<std::string> arg_list(argv, argv + argc);
   if (argc < 2) {
     throw std::runtime_error(
         "UTM: error: Missing arguments, use -h for more information \n");
   }
-  if (argList[1] == "-h") {
+  if (arg_list[1] == "-h") {
     help();
   }
-  if (argList[1] == "-f") {
+  if (arg_list[1] == "-f") {
     if (argc < 3) {
       throw std::runtime_error("UTM: error: filename expected \n");
     }
-    start_machine(argList[2]);
+    start_machine(arg_list[2]);
   }
 }
 
