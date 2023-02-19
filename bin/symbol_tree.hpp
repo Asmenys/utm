@@ -1,4 +1,3 @@
-#include "deque"
 #include "symbol_node.hpp"
 #include <deque>
 #include <string>
