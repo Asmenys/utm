@@ -5,7 +5,7 @@
 
 class ArgParser {
   static void help();
-  static void start_machine(std::string filename);
+  static void start_machine(std::vector<std::string> filenames);
   static std::vector<char> options;
   static std::vector<std::string> definitions;
 

@@ -32,11 +32,27 @@ void ArgParser::parse_args(int argc, char *argv[]) {
     if (argc < 3) {
       throw std::runtime_error("UTM: error: filename expected \n");
     }
-    start_machine(arg_list[2]);
+    std::vector<std::string> filenames;
+    for (int i = 2; i < argc; i++) {
+      filenames.push_back(arg_list[i]);
+    }
+    start_machine(filenames);
   }
 }
 
-void ArgParser::start_machine(std::string filename) {
-  TuringMachine machine(filename);
-  machine.start();
+void ArgParser::start_machine(std::vector<std::string> filenames) {
+  std::vector<TuringMachine> machines;
+  for (int i = 0; i < filenames.size(); i++) {
+    machines.push_back(TuringMachine(filenames[i]));
+    machines[i].start();
+  }
+  bool finished = 1;
+  while (finished) {
+    finished = 0;
+    system("clear");
+    for (int i = 0; i < machines.size(); i++) {
+      finished += machines[i].new_state();
+      machines[i].tapes.front().print_state();
+    }
+  }
 }

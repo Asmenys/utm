@@ -10,7 +10,6 @@ class TuringMachine {
   std::map<std::string, SymbolTree> tree_map;
   std::ifstream tape_file;
   int tape_count;
-  std::vector<Tape> tapes;
   bool tape_exists(std::string filename);
   void open_file(std::string filename);
   void get_tapes();
@@ -21,9 +20,10 @@ class TuringMachine {
   void read_machine_data();
   void build_state_trees();
   SymbolNode get_current_symbol_node(SymbolNode const &root);
-  bool new_state();
 
 public:
+  bool new_state();
+  std::vector<Tape> tapes;
   TuringMachine(std::string filename);
   void start();
 };

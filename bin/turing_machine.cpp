@@ -105,8 +105,4 @@ bool TuringMachine::new_state() {
 void TuringMachine::start() {
   read_machine_data();
   build_state_trees();
-  while (new_state()) {
-    system("clear");
-    tapes.front().print_state();
-  }
 }
