@@ -2,16 +2,11 @@
 #include "symbol_node.hpp"
 #include "symbol_tree.hpp"
 #include <algorithm>
-#include <cctype>
-#include <cstddef>
 #include <deque>
 #include <fstream>
-#include <iostream>
 #include <map>
-#include <ostream>
 #include <stdexcept>
 #include <string>
-#include <utility>
 #include <vector>
 
 TuringMachine::TuringMachine(std::string filename) : current_state("0") {
