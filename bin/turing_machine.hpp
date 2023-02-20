@@ -20,6 +20,7 @@ class TuringMachine {
   void symbols_to_tree(std::vector<std::string> symbols);
   void read_machine_data();
   void build_state_trees();
+  SymbolNode get_current_symbol_node(SymbolNode const &root);
   bool new_state();
 
 public:

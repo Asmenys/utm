@@ -76,20 +76,23 @@ void TuringMachine::build_state_trees() {
   }
 }
 
+SymbolNode TuringMachine::get_current_symbol_node(SymbolNode const &root) {
+  std::string current_symbol = tapes[0].current_symbol();
+  if (root.adjacent_nodes.count(current_symbol) == 0) {
+    throw std::runtime_error("UTM: error: Halted. No rule for state " +
+                             root.value + " and symbol " + current_symbol +
+                             "\n");
+  }
+  return root.adjacent_nodes.at(current_symbol);
+}
+
 bool TuringMachine::new_state() {
   if (tree_map.count(current_state) == 0) {
     std::cout << "UTM: Halted with state " + current_state << std::endl;
     return 0;
   }
   SymbolNode current_state_root = tree_map.at(current_state).root;
-  std::string current_symbol = tapes[0].current_symbol();
-  if (current_state_root.adjacent_nodes.count(current_symbol) == 0) {
-    throw std::runtime_error("UTM: error: Halted. No rule for state " +
-                             current_state + " and symbol " + current_symbol +
-                             "\n");
-  }
-  SymbolNode current_symbol_node =
-      current_state_root.adjacent_nodes.at(current_symbol);
+  SymbolNode current_symbol_node = get_current_symbol_node(current_state_root);
   SymbolNode new_symbol_node =
       current_symbol_node.adjacent_nodes.begin()->second;
   tapes[0].set_new_symbol(new_symbol_node.value);
@@ -102,4 +105,8 @@ bool TuringMachine::new_state() {
 void TuringMachine::start() {
   read_machine_data();
   build_state_trees();
+  while (new_state()) {
+    system("clear");
+    tapes.front().print_state();
+  }
 }
