@@ -50,6 +50,6 @@ void Tape::print_state() {
     for (int i = 0; i < tape.size(); i++) {
       std::cout << tape[i];
     }
-    std::cout<<"\n\n"<<std::setw(head_position-1)<<" "<<"\\/";
+    std::cout<<"\n\n"<<std::setw(head_position-1)<<" "<<"/\\\n";
   }
 }

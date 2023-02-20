@@ -55,4 +55,5 @@ void ArgParser::start_machine(std::vector<std::string> filenames) {
       machines[i].tapes.front().print_state();
     }
   }
+  system("clear");
 }
