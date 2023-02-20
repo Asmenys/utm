@@ -9,16 +9,19 @@ class TuringMachine {
   std::string current_state;
   std::map<std::string, SymbolTree> tree_map;
   std::ifstream tape_file;
-  std::vector<Tape> tapes;
   int tape_count;
+  std::vector<Tape> tapes;
   bool tape_exists(std::string filename);
   void open_file(std::string filename);
   std::vector<std::string> get_tape();
   int get_int();
+  std::string get_symbol_string();
   std::vector<std::string> get_symbols();
-  std::vector<std::string> string_to_vector(const std::string &string);
+  std::vector<std::string> string_to_vector(std::string string);
   void symbols_to_tree(std::vector<std::string> symbols);
+  void build_state_trees();
 
 public:
   TuringMachine(std::string filename);
+  void start();
 };
