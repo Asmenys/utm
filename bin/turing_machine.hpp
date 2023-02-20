@@ -6,17 +6,18 @@
 #include <vector>
 
 class TuringMachine {
-
   std::string current_state;
   std::map<std::string, SymbolTree> tree_map;
   std::ifstream tape_file;
-  std::string state;
+  std::vector<Tape> tapes;
+  int tape_count;
   bool tape_exists(std::string filename);
   void open_file(std::string filename);
   std::vector<std::string> get_tape();
   int get_int();
   std::vector<std::string> get_symbols();
   std::vector<std::string> string_to_vector(const std::string &string);
+  void symbols_to_tree(std::vector<std::string> symbols);
 
 public:
   TuringMachine(std::string filename);

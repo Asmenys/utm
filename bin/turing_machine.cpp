@@ -1,9 +1,15 @@
 #include "turing_machine.hpp"
+#include "symbol_node.hpp"
+#include "symbol_tree.hpp"
+#include <deque>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
+
 TuringMachine::TuringMachine(std::string filename) { open_file(filename); }
 
 bool TuringMachine::tape_exists(std::string filename) {
@@ -44,4 +50,11 @@ std::vector<std::string> TuringMachine::get_symbols() {
   std::string symbol_string;
   tape_file >> symbol_string;
   return string_to_vector(symbol_string);
+}
+
+void TuringMachine::symbols_to_tree(std::vector<std::string> symbols) {
+  SymbolTree tree(symbols.front());
+  tree_map.insert(std::pair<std::string, SymbolTree>(symbols.front(), tree));
+  std::deque<std::string> nodes(symbols.begin() + 1, symbols.end());
+  tree.insert_branch(nodes);
 }
