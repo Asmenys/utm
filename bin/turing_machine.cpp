@@ -29,20 +29,16 @@ void TuringMachine::open_file(std::string filename) {
   tape_file = std::ifstream(filename);
 }
 
-int TuringMachine::get_int() {
-  int integer;
-  tape_file >> integer;
-  return integer;
-}
-
-std::vector<std::string> TuringMachine::get_tape() {
-  std::vector<std::string> vector;
-  std::string tape_from_file;
-  tape_file >> tape_from_file;
-  for (int i = 0; i < tape_from_file.size(); i++) {
-    vector.push_back(std::string(1, tape_from_file[i]));
+void TuringMachine::get_tapes() {
+  for (int i = 0; i < tape_count; i++) {
+    std::vector<std::string> tape;
+    std::string tape_from_file;
+    tape_file >> tape_from_file;
+    for (int i = 0; i < tape_from_file.size(); i++) {
+      tape.push_back(std::string(1, tape_from_file[i]));
+    }
+    tapes.push_back(tape);
   }
-  return vector;
 }
 
 std::vector<std::string> TuringMachine::get_symbols() {
@@ -62,22 +58,18 @@ void TuringMachine::symbols_to_tree(std::vector<std::string> symbols) {
   tree_map.at(symbols.front()).insert_branch(nodes);
 }
 
+void TuringMachine::read_machine_data() {
+  tape_file >> tape_count;
+  get_tapes();
+}
+
 void TuringMachine::build_state_trees() {
-  tape_file >> std::ws;
   while (true) {
     if (tape_file.peek() == EOF) {
       break;
     }
     std::vector<std::string> symbols = get_symbols();
     symbols_to_tree(symbols);
-  }
-}
-
-void TuringMachine::read_machine_data() {
-  tape_count = get_int();
-  for (int i = 0; i < tape_count; i++) {
-    tapes.push_back(get_tape());
-    tapes[i].head_position = get_int() - 1;
   }
 }
 
@@ -107,8 +99,4 @@ bool TuringMachine::new_state() {
 void TuringMachine::start() {
   read_machine_data();
   build_state_trees();
-  while (new_state()) {
-    system("clear");
-    tapes[0].print_state();
-  }
 }

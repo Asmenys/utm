@@ -13,8 +13,7 @@ class TuringMachine {
   std::vector<Tape> tapes;
   bool tape_exists(std::string filename);
   void open_file(std::string filename);
-  std::vector<std::string> get_tape();
-  int get_int();
+  void get_tapes();
   std::string get_symbol_string();
   std::vector<std::string> get_symbols();
   std::vector<std::string> string_to_vector(std::string string);
