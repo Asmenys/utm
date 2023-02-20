@@ -61,6 +61,9 @@ void TuringMachine::symbols_to_tree(std::vector<std::string> symbols) {
 void TuringMachine::read_machine_data() {
   tape_file >> tape_count;
   get_tapes();
+  for (int i = 0; i < tape_count; i++) {
+    tape_file >> tapes[i].head_position;
+  }
 }
 
 void TuringMachine::build_state_trees() {
