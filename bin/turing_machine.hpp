@@ -19,7 +19,9 @@ class TuringMachine {
   std::vector<std::string> get_symbols();
   std::vector<std::string> string_to_vector(std::string string);
   void symbols_to_tree(std::vector<std::string> symbols);
+  void read_machine_data();
   void build_state_trees();
+  bool new_state();
 
 public:
   TuringMachine(std::string filename);

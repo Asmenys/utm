@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <vector>
 class Tape {
@@ -10,4 +11,6 @@ public:
   void after_head_move();
   bool compare_symbol(std::string symbol);
   void set_new_symbol(std::string new_symbol);
+  std::string current_symbol();
+  void print_state();
 };

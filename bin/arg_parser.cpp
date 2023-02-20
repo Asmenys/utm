@@ -37,5 +37,6 @@ void ArgParser::parse_args(int argc, char *argv[]) {
 }
 
 void ArgParser::start_machine(std::string filename) {
-  TuringMachine Machine(filename);
+  TuringMachine machine(filename);
+  machine.start();
 }

@@ -2,8 +2,10 @@
 #include "symbol_node.hpp"
 #include "symbol_tree.hpp"
 #include <algorithm>
+#include <cstdlib>
 #include <deque>
 #include <fstream>
+#include <iostream>
 #include <map>
 #include <stdexcept>
 #include <string>
@@ -75,11 +77,42 @@ void TuringMachine::build_state_trees() {
   }
 }
 
-void TuringMachine::start() {
+void TuringMachine::read_machine_data() {
   tape_count = get_int();
   for (int i = 0; i < tape_count; i++) {
     tapes.push_back(get_tape());
-    tapes[i].head_position = get_int();
+    tapes[i].head_position = get_int() - 1;
   }
+}
+
+bool TuringMachine::new_state() {
+  if (tree_map.count(current_state) == 0) {
+    std::cout << "UTM: Halted with state " + current_state << std::endl;
+    return 0;
+  }
+  SymbolNode current_state_root = tree_map.at(current_state).root;
+  std::string current_symbol = tapes[0].current_symbol();
+  if (current_state_root.adjacent_nodes.count(current_symbol) == 0) {
+    throw std::runtime_error("UTM: error: Halted. No rule for state " +
+                             current_state + " and symbol " + current_symbol +
+                             "\n");
+  }
+  SymbolNode current_symbol_node =
+      current_state_root.adjacent_nodes.at(current_symbol);
+  SymbolNode new_symbol_node =
+      current_symbol_node.adjacent_nodes.begin()->second;
+  tapes[0].set_new_symbol(new_symbol_node.value);
+  SymbolNode movement_node = new_symbol_node.adjacent_nodes.begin()->second;
+  tapes[0].move_head(movement_node.value);
+  current_state = movement_node.adjacent_nodes.begin()->first;
+  return 1;
+}
+
+void TuringMachine::start() {
+  read_machine_data();
   build_state_trees();
+  while (new_state()) {
+    system("clear");
+    tapes[0].print_state();
+  }
 }
