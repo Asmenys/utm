@@ -1,9 +1,8 @@
 #include "arg_parser.hpp"
-#include "iomanip"
-#include "iostream"
-#include "stdexcept"
-#include <exception>
-#include <ostream>
+#include "turing_machine.hpp"
+#include <iomanip>
+#include <iostream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -37,4 +36,6 @@ void ArgParser::parse_args(int argc, char *argv[]) {
   }
 }
 
-void ArgParser::start_machine(std::string filename) {}
+void ArgParser::start_machine(std::string filename) {
+  TuringMachine Machine(filename);
+}
