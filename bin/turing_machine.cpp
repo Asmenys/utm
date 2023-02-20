@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -46,15 +47,10 @@ std::vector<std::string> TuringMachine::get_tape() {
 
 std::vector<std::string> TuringMachine::get_symbols() {
   std::vector<std::string> symbols;
-  while (tape_file.peek() != '\n') {
+  for (int i = 0; i < 5; i++) {
     std::string symbol;
     tape_file >> symbol;
     symbols.push_back(symbol);
-  }
-  tape_file.get();
-  if (symbols.size() != 5) {
-    throw std::runtime_error(
-        "UTM: tape: instructions: invalid argument count\n");
   }
   return symbols;
 }
