@@ -3,6 +3,7 @@
 #include <fstream>
 #include <map>
 #include <string>
+#include <vector>
 
 class TuringMachine {
 
@@ -12,6 +13,10 @@ class TuringMachine {
   std::string state;
   bool tape_exists(std::string filename);
   void open_file(std::string filename);
+  std::vector<std::string> get_tape();
+  int get_int();
+  std::vector<std::string> get_symbols();
+  std::vector<std::string> string_to_vector(const std::string &string);
 
 public:
   TuringMachine(std::string filename);
