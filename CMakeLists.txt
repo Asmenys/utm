@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(UniversalTuringMachine)
+set(PROJECT_NAME UniversalTuringMachine)
+
+project(${PROJECT_NAME})
 
 set(BINARY_DIR src/bin)
 
@@ -14,3 +16,6 @@ add_executable(
   ${BINARY_DIR}/turing_machine.cpp
   )
 
+set(TEST_DIR ../boost_tests)
+
+add_subdirectory(boost_tests)
